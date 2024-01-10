@@ -155,6 +155,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let contadores = document.querySelectorAll(".contador");
     let btnAgregarCarrito = document.querySelectorAll(".btnAgregarCarrito");
     let btnComprar = document.querySelectorAll(".btnComprar");
+    let buttonComprarCarrito = document.querySelector("#button-comprar-carrito")
 
     let stock = 9;
 
@@ -238,10 +239,50 @@ document.addEventListener("DOMContentLoaded", function () {
             })
         };
     });
+    buttonComprarCarrito.addEventListener("click", () => {
+        if (carrito.length > 0) {
+            Swal.fire({
+                title: "¿Confirmar compra?",
+                text: "Esta acción finalizará tu compra. ¿Estás seguro?",
+                showCancelButton: true,
+                confirmButtonText: "Sí, comprar",
+                cancelButtonText: "Cancelar",
+                confirmButtonColor: "green",
+                cancelButtonColor: "maroon",
+                icon: "question",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    realizarCompraCarrito();
+                }
+            });
+        } else {
+            Swal.fire({
+                title: "El Carrito está vacío",
+                text: "Agrega productos al carrito antes de realizar una compra.",
+                icon: "warning",
+            });
+        }
+    });
+    
+    function realizarCompraCarrito() {
+        Swal.fire({
+            title: "Compra realizada con éxito",
+            text: "Gracias por tu compra. Los productos llegarán pronto.",
+            icon: "success",
+            timer: 3000,
+            timerProgressBar: true,
+        }).then(() => {
+            carrito = []; 
+            actualizarCarritoYLocalStorage(); 
+        });
+    }
+
 
     function actualizarPrecio(producto, cantidad, index) {
         const precioTotal = (cantidad * producto.precio).toFixed(2);
         document.getElementById(`precio-${producto.titulo}`).innerText = `Precio: $${precioTotal}`;
     }
+
+
 });
 
