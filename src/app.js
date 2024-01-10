@@ -1,4 +1,5 @@
 import Swal from "sweetalert2";
+import Toastify from "toastify-js"
 
 export function app() {
     console.log("La aplicación se está ejecutando...");
@@ -52,7 +53,7 @@ const productos = [
         titulo:"Paris Saint Germain 2024",
         descripcion:"<br><b>Kyliam Mbappe</b></br> jugador fiel al psg en este último tiempo",
         precio:9.99,
-    },
+    }
 ];
 
 let carrito = [];
