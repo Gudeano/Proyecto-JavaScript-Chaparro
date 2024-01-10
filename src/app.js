@@ -43,7 +43,7 @@ const productos = [
         precio:9.99,
     },
     {
-        imagen:"img/inter-miami-2024.png",
+        imagen:"./img/inter-miami-2024.png",
         titulo:"Inter de Miami 2024",
         descripcion:"<br><b>Lionel Messi</b></br>El mejor jugador de toda la historia en la MLS",
         precio:9.99,
