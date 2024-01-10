@@ -7,37 +7,37 @@ export function app() {
 
 const productos = [
     {
-        imagen: "img/barcelona-2015.png",
+        imagen: "./img/barcelona-2015.png",
         titulo: "Barcelona 2015",
         descripcion: "<br><b>Lionel Messi</b></br> Una de las mejores camisetas vendidas por la empresa.",
         precio: 9.99
     },
     {
-        imagen: "img/manchester-city-2024.png",
+        imagen: "./img/manchester-city-2024.png",
         titulo: "Manchester City 2024",
         descripcion: "<br><b>Erling Haaland</b></br> el futuro ganador del Balón de Oro 2024",
         precio: 9.99
     },
     {
-        imagen: "img/real-madrid-2018.png",
+        imagen: "./img/real-madrid-2018.png",
         titulo: "Real Madrid 2018",
         descripcion: "<br><b>Cristiano Ronaldo</b></br> uno de los mejores de la historia",
         precio: 9.99,
     },
     {
-        imagen:"img/manchester-united-2010.png",
+        imagen:"./img/manchester-united-2010.png",
         titulo: "Manchester United 2010",
         descripcion: "<br><b>Wayne Rooney</b></br> uno de los referentes del United de esa época",
         precio: 9.99,
     },
     {
-        imagen:"img/chelsea-2024.png",
+        imagen:"./img/chelsea-2024.png",
         titulo:"Chelsea 2024",
         descripcion:"<br><b>Enzo Fernandez</b></br> El mejor jugador joven del Mundial 2022",
         precio:9.99,
     },
     {
-        imagen:"img/liverpool-2024.png",
+        imagen:"./img/liverpool-2024.png",
         titulo:"Liverpool 2024",
         descripcion:"<br><b>Alexis Mac-Alister</b></br> uno de los mejores centrales del Liverpool",
         precio:9.99,
@@ -49,7 +49,7 @@ const productos = [
         precio:9.99,
     },
     {
-        imagen:"img/psg-2024.png",
+        imagen:"./img/psg-2024.png",
         titulo:"Paris Saint Germain 2024",
         descripcion:"<br><b>Kyliam Mbappe</b></br> jugador fiel al psg en este último tiempo",
         precio:9.99,
