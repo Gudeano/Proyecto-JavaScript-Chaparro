@@ -40,3 +40,11 @@
     align-items: center;
     min-height: 100vh; /* Opcional: hace que el contenedor sea al menos del 100% de la altura de la ventana */
 }
+
+#h2-carrito {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+};
+
+.main-estilos {
+    background-color: rgb(0, 0, 0);
+}

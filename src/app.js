@@ -1,3 +1,4 @@
+import {v4 as generarId} from "uuid"
 import Swal from "sweetalert2";
 import Toastify from "toastify-js"
 
@@ -5,56 +6,78 @@ export function app() {
     console.log("La aplicación se está ejecutando...");
 }
 
+
 const productos = [
     {
         imagen: "./img/barcelona-2015.png",
         titulo: "Barcelona 2015",
         descripcion: "<br><b>Lionel Messi</b></br> Una de las mejores camisetas vendidas por la empresa.",
-        precio: 9.99
+        precio: 9.99,
+        id: generarId(),
     },
     {
         imagen: "./img/manchester-city-2024.png",
         titulo: "Manchester City 2024",
         descripcion: "<br><b>Erling Haaland</b></br> el futuro ganador del Balón de Oro 2024",
-        precio: 9.99
+        precio: 9.99,
+        id: generarId(),
     },
     {
         imagen: "./img/real-madrid-2018.png",
         titulo: "Real Madrid 2018",
-        descripcion: "<br><b>Cristiano Ronaldo</b></br> uno de los mejores de la historia",
+        descripcion: "<br><b>Cristiano Ronaldo</b></br> Uno de los mejores de la historia, después de Lionel Messi",
         precio: 9.99,
+        id: generarId(),
     },
     {
         imagen:"./img/manchester-united-2010.png",
         titulo: "Manchester United 2010",
-        descripcion: "<br><b>Wayne Rooney</b></br> uno de los referentes del United de esa época",
+        descripcion: "<br><b>Wayne Rooney</b></br> Uno de los referentes del United de esa época",
         precio: 9.99,
+        id: generarId(),
     },
     {
         imagen:"./img/chelsea-2024.png",
         titulo:"Chelsea 2024",
         descripcion:"<br><b>Enzo Fernandez</b></br> El mejor jugador joven del Mundial 2022",
         precio:9.99,
+        id: generarId(),
     },
     {
         imagen:"./img/liverpool-2024.png",
         titulo:"Liverpool 2024",
         descripcion:"<br><b>Alexis Mac-Alister</b></br> uno de los mejores centrales del Liverpool",
         precio:9.99,
+        id: generarId(),
     },
     {
         imagen:"./img/inter-miami-2024.png",
         titulo:"Inter de Miami 2024",
         descripcion:"<br><b>Lionel Messi</b></br>El mejor jugador de toda la historia en la MLS",
         precio:9.99,
+        id: generarId(),
     },
     {
         imagen:"./img/psg-2024.png",
         titulo:"Paris Saint Germain 2024",
-        descripcion:"<br><b>Kyliam Mbappe</b></br> jugador fiel al psg en este último tiempo",
+        descripcion:"<br><b>Kyliam Mbappe</b></br> Jugador fiel al psg en este último tiempo",
         precio:9.99,
+        id: generarId(),
     }
 ];
+
+const productosCamisetas = async () => {
+    try {
+        const resp = await fetch("/data/productos.json");
+        const data = await resp.json();
+        productos = [...data]
+
+    } catch( error ) {
+        console.log("Error al obtener algunos datos");
+    }
+}
+
+productosCamisetas();
 
 let carrito = [];
 
@@ -125,6 +148,8 @@ function actualizarCarrito() {
 function eliminarProductoDelCarrito(index) {
     carrito.splice(index, 1);
     actualizarCarritoYLocalStorage();
+
+    Swal.fire 
 }
 
 // Función para actualizar el carrito y almacenar en localStorage
@@ -137,6 +162,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const contenedorCards = document.getElementById('contenedor-cards');
 
     productos.forEach((producto, index) => {
+        producto.id = generarId(); 
         const card = generarCard(producto, index);
         contenedorCards.appendChild(card);
     });
@@ -193,7 +219,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 carrito.push({ producto, cantidad });
             }
 
-
+            Toastify({
+                text: "Se ha añadido al Carrito " ,  
+                duration: 3000,
+                gravity: "bottom",
+                
+                }).showToast();
 
             actualizarCarritoYLocalStorage(); // Actualizar y almacenar en localStorage
         };
@@ -221,7 +252,9 @@ document.addEventListener("DOMContentLoaded", function () {
                         text: 'Espero que lo disfrute, en menos de 1 semana, estará en tu casa',
                         icon: 'success',
                         confirmButtonText: "Salir",
-                        confirmButtonColor: "green"
+                        confirmButtonColor: "red",
+                        timerProgressBar: true,
+                        timer: 2500,
                     }).then(() => {
                         carrito = []; // Limpiar el carrito después de la compra
                         actualizarCarritoYLocalStorage(); // Actualizar y almacenar en localStorage
@@ -260,6 +293,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 title: "El Carrito está vacío",
                 text: "Agrega productos al carrito antes de realizar una compra.",
                 icon: "warning",
+                confirmButtonColor: "red",
+                confirmButtonText: "Salir"
             });
         }
     });
@@ -267,10 +302,12 @@ document.addEventListener("DOMContentLoaded", function () {
     function realizarCompraCarrito() {
         Swal.fire({
             title: "Compra realizada con éxito",
-            text: "Gracias por tu compra. Los productos llegarán pronto.",
+            text: "Gracias por tu compra. Los productos llegarán pronto a su domicilio.",
             icon: "success",
             timer: 3000,
             timerProgressBar: true,
+            confirmButtonColor: "red",
+            confirmButtonText: "Salir"
         }).then(() => {
             carrito = []; 
             actualizarCarritoYLocalStorage(); 
